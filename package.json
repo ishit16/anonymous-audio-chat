@@ -2,10 +2,17 @@
   "name": "anonymous-audio-chat",
   "version": "1.0.0",
   "description": "Anonymous audio chat for the NGO - WeListen.",
-  "main": "index.js",
   "repository": "https://github.com/relaxxpls/anonymous-audio-chat",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "client:dev": "yarn workspace @metarashtra/frontend dev",
+    "client:build": "yarn workspace @metarashtra/frontend build",
+    "client:start": "yarn workspace @metarashtra/frontend start",
+    "client:lint": "yarn workspace @metarashtra/frontend lint",
+    "server:dev": "yarn workspace @metarashtra/backend dev",
+    "server:start": "yarn workspace @metarashtra/backend start"
+  },
   "workspaces": [
     "packages/client",
     "packages/server",

@@ -12,11 +12,16 @@
   },
   "dependencies": {
     "@app/shared": "^1.0.0",
+    "antd": "^4.18.3",
     "next": "12.0.7",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
+    "socket.io-client": "^4.4.1",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^2.0.2",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.7"
   }
