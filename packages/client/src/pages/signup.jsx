@@ -26,8 +26,6 @@ const Demo = () => {
       console.log(response);
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
 
     if (values["password"] == values["Confirm password"]) {
