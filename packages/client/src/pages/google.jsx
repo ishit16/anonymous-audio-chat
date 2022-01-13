@@ -6,6 +6,7 @@ export default function Home() {
     return (
       <div className="{styles.container}">
         Welcome user
+        {console.log(session)}
         <br />
         <button onClick={() => signOut()}>Sign out</button>
       </div>

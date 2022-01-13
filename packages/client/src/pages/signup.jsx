@@ -3,27 +3,44 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import styled from "styled-components";
 import { useState } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const Demo = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const { data: session } = useSession();
+  if (session) {
+    // return (
+    //   <div className="{styles.container}">
+    //     Welcome user
+    //     <br />
+    //     <button onClick={() => signOut()}>Sign out</button>
+    //   </div>
+    // );
+    let r = (Math.random() + 1).toString(36).substring(2);
+    console.log("random", r);
 
-  const google = function onSignIn(googleUser) {
-    // Useful data for your client-side scripts:
-    var profile = googleUser.getBasicProfile();
-    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-    console.log("Full Name: " + profile.getName());
-    console.log("Given Name: " + profile.getGivenName());
-    console.log("Family Name: " + profile.getFamilyName());
-    console.log("Image URL: " + profile.getImageUrl());
-    console.log("Email: " + profile.getEmail());
+    router.push("/discuss/" + r);
+  }
 
-    // The ID token you need to pass to your backend:
-    var id_token = googleUser.getAuthResponse().id_token;
-    console.log("ID Token: " + id_token);
-  };
+  // const google = function onSignIn(googleUser) {
+  //   // Useful data for your client-side scripts:
+  //   var profile = googleUser.getBasicProfile();
+  //   console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+  //   console.log("Full Name: " + profile.getName());
+  //   console.log("Given Name: " + profile.getGivenName());
+  //   console.log("Family Name: " + profile.getFamilyName());
+  //   console.log("Image URL: " + profile.getImageUrl());
+  //   console.log("Email: " + profile.getEmail());
+
+  //   // The ID token you need to pass to your backend:
+  //   var id_token = googleUser.getAuthResponse().id_token;
+  //   console.log("ID Token: " + id_token);
+  // };
 
   const onFinish = async (values) => {
+    console.log("session", session, "data", data);
+
     try {
       // make axios post request
       setLoading(true);
@@ -62,7 +79,7 @@ const Demo = () => {
       initialValues={{
         remember: true,
       }}
-      onFinish={google}
+      onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
@@ -123,6 +140,9 @@ const Demo = () => {
       >
         <Button type="primary" htmlType="submit" loading={loading}>
           Submit
+        </Button>
+        <Button type="primary" onClick={() => signIn()}>
+          Signin
         </Button>
       </Form.Item>
     </StyledForm>
