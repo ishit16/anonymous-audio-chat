@@ -4,11 +4,13 @@ import axios from "axios";
 import styled from "styled-components";
 import { useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { v4 as uuidv4 } from "uuid";
 
 const Demo = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
+
   if (session) {
     // return (
     //   <div className="{styles.container}">
@@ -17,30 +19,14 @@ const Demo = () => {
     //     <button onClick={() => signOut()}>Sign out</button>
     //   </div>
     // );
-    let r = (Math.random() + 1).toString(36).substring(2);
-    console.log("random", r);
 
-    router.push("/discuss/" + r);
+    let roomID = uuidv4();
+    console.log(roomID, "roomID");
+
+    router.push("/discuss/" + roomID);
   }
 
-  // const google = function onSignIn(googleUser) {
-  //   // Useful data for your client-side scripts:
-  //   var profile = googleUser.getBasicProfile();
-  //   console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-  //   console.log("Full Name: " + profile.getName());
-  //   console.log("Given Name: " + profile.getGivenName());
-  //   console.log("Family Name: " + profile.getFamilyName());
-  //   console.log("Image URL: " + profile.getImageUrl());
-  //   console.log("Email: " + profile.getEmail());
-
-  //   // The ID token you need to pass to your backend:
-  //   var id_token = googleUser.getAuthResponse().id_token;
-  //   console.log("ID Token: " + id_token);
-  // };
-
   const onFinish = async (values) => {
-    console.log("session", session, "data", data);
-
     try {
       // make axios post request
       setLoading(true);
@@ -141,8 +127,8 @@ const Demo = () => {
         <Button type="primary" htmlType="submit" loading={loading}>
           Submit
         </Button>
-        <Button type="primary" onClick={() => signIn()}>
-          Signin
+        <Button onClick={() => signIn("google")} type="text">
+          Signin via gooogle
         </Button>
       </Form.Item>
     </StyledForm>
@@ -157,7 +143,7 @@ const StyledForm = styled(Form)`
   gap: 1.5rem;
   margin-bottom: 1rem;
   padding: 1rem;
-  background: ${({ theme }) => theme.secondary};
+  background: green;
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: 0 0 0.5rem rgb(0 0 0 / 50%);
 `;

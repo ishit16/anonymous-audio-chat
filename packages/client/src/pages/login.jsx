@@ -1,14 +1,15 @@
 import { Form, Input, Button, Checkbox } from "antd";
 import { useRouter } from "next/router";
+import { v4 as uuidv4 } from "uuid";
 
 const Demo = () => {
   const router = useRouter();
   const onFinish = (values) => {
     console.log("Success:", values);
-    let r = (Math.random() + 1).toString(36).substring(2);
-    console.log("random", r);
+    let roomID = uuidv4();
+    console.log(roomID, "roomID");
 
-    router.push("/discuss/" + r);
+    router.push("/discuss/" + roomID);
     // <Link href="/login">
     //     <a>Hii</a>
     // </Link>

@@ -16,7 +16,7 @@ export default NextAuth({
       jwt: {
         encryption: true,
       },
-      secret: process.env.secret,
+
       callbacks: {
         async jwt(token, account) {
           if (account?.accesstoken) {
@@ -26,11 +26,12 @@ export default NextAuth({
         },
         redirect: async (url, _baseurl) => {
           if (url === "/profile") {
-            return Promise.resolve("/");
+            return Promise.resolve("/disuss");
           }
-          return Promise.resolve("/");
+          return Promise.resolve("/discuss");
         },
       },
     }),
   ],
+  secret: process.env.secret,
 });
