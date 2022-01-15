@@ -9,23 +9,22 @@ import { v4 as uuidv4 } from "uuid";
 const Demo = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  let roomID = uuidv4();
 
-  if (session) {
-    // return (
-    //   <div className="{styles.container}">
-    //     Welcome user
-    //     <br />
-    //     <button onClick={() => signOut()}>Sign out</button>
-    //   </div>
-    // );
-
-    let roomID = uuidv4();
-    console.log(roomID, "roomID");
-
-    router.push("/discuss/" + roomID);
+  // if (session) {
+  //   // return (
+  //   //   <div className="{styles.container}">
+  //   //     Welcome user
+  //   //     <br />
+  //   //     <button onClick={() => signOut()}>Sign out</button>
+  //   //   </div>
+  //   // );
+  //   router.push("/discuss/" + roomID);
+  // }
+  if (status == "loading") {
+    return <h1>Loading.....</h1>;
   }
-
   const onFinish = async (values) => {
     try {
       // make axios post request
@@ -127,7 +126,14 @@ const Demo = () => {
         <Button type="primary" htmlType="submit" loading={loading}>
           Submit
         </Button>
-        <Button onClick={() => signIn("google")} type="text">
+        <Button
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: "http://localhost:3000/discuss/" + roomID,
+            })
+          }
+          type="text"
+        >
           Signin via gooogle
         </Button>
       </Form.Item>
@@ -143,7 +149,7 @@ const StyledForm = styled(Form)`
   gap: 1.5rem;
   margin-bottom: 1rem;
   padding: 1rem;
-  background: green;
-  border-radius: ${({ theme }) => theme.borderRadius};
+  background: lightblue;
+  border-radius: 1 rem;
   box-shadow: 0 0 0.5rem rgb(0 0 0 / 50%);
 `;

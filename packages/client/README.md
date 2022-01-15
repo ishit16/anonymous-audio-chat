@@ -32,3 +32,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Me
+
+Imprvement -
+Use SMTP for sending mails - limit 5000 mails per day for free
+
+Bugs -
+Remove Hash after the discuss
+Check jwt token validity in jwt website and send data within it
