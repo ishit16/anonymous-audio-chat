@@ -26,25 +26,45 @@ const Demo = () => {
     return <h1>Loading.....</h1>;
   }
   const onFinish = async (values) => {
+    // console.log("Success:", values);
+    // let roomID = uuidv4();
+    // console.log(roomID, "roomID");
+    console.log(values);
+    delete values["remember"];
+    delete values["Confirm password"];
+
+    // const formData = new FormData();
+    // formData.append("name", "Rishikesh");
+    // console.log(
+    //   JSON.stringify({
+    //     values,
+    //   })
+    // );
+
+    // router.push("/discuss/" + roomID);
+
+    // axios.post(`http://localhost:8000/auth/register`, values).then((res) => {
+    //   console.log(res);
+    //   console.log(res.data);
+    // });
+
     try {
-      // make axios post request
       setLoading(true);
+      // make axios post request
+
+      // console.log("values", values);
+
       const response = await axios({
         method: "post",
-        url: "https://httpstat.us/200?sleep=5000",
+        url: "http://localhost:8000/auth/register",
+        headers: { "content-type": "application/json" },
         data: values,
       });
-      console.log(response);
+      console.log(response, response.data);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
-    }
-
-    if (values["password"] == values["Confirm password"]) {
-      router.push("/login");
-    } else {
-      alert("Password doesn't match");
     }
   };
 
