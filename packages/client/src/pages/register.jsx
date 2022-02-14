@@ -6,8 +6,17 @@ import { useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
 
-const Demo = () => {
+// const preventDefault = (f) => (e: SyntheticEvent) => {
+//   console.log(e);
+//   e.preventDefault();
+//   f(e);
+// };
+
+const Register = () => {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession();
   let roomID = uuidv4();
@@ -26,12 +35,10 @@ const Demo = () => {
     return <h1>Loading.....</h1>;
   }
   const onFinish = async (values) => {
+    // event.preventDefault();
     // console.log("Success:", values);
     // let roomID = uuidv4();
     // console.log(roomID, "roomID");
-    console.log(values);
-    delete values["remember"];
-    delete values["Confirm password"];
 
     // const formData = new FormData();
     // formData.append("name", "Rishikesh");
@@ -50,6 +57,7 @@ const Demo = () => {
 
     try {
       setLoading(true);
+      console.log(values);
       // make axios post request
 
       // console.log("values", values);
@@ -58,7 +66,11 @@ const Demo = () => {
         method: "post",
         url: "http://localhost:8000/auth/register",
         headers: { "content-type": "application/json" },
-        data: values,
+        data: JSON.stringify({
+          email,
+          username,
+          password,
+        }),
       });
       console.log(response, response.data);
     } catch (error) {
@@ -89,8 +101,22 @@ const Demo = () => {
       autoComplete="off"
     >
       <Form.Item
+        label="Email"
+        name="email"
+        onChange={(e) => setEmail(e.target.value)}
+        rules={[
+          {
+            required: true,
+            message: "Please input your email!",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
         label="Username"
-        name="username"
+        name="name"
+        onChange={(e) => setUsername(e.target.value)}
         rules={[
           {
             required: true,
@@ -104,6 +130,7 @@ const Demo = () => {
       <Form.Item
         label="Password"
         name="password"
+        onChange={(e) => setPassword(e.target.value)}
         rules={[
           {
             required: true,
@@ -124,17 +151,6 @@ const Demo = () => {
         ]}
       >
         <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        name="remember"
-        valuePropName="checked"
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      >
-        <Checkbox>Remember me</Checkbox>
       </Form.Item>
 
       <Form.Item
@@ -161,7 +177,7 @@ const Demo = () => {
   );
 };
 
-export default Demo;
+export default Register;
 
 const StyledForm = styled(Form)`
   display: flex;

@@ -37,6 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 Imprvement -
 Use SMTP for sending mails - limit 5000 mails per day for free
+e.prenent default - not able to pass event in submit function
 
 Bugs -
 Remove Hash after the discuss
