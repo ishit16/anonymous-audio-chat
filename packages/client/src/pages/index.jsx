@@ -11,7 +11,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Title>Hello World</Title>
+      <Title className="text-3xl underline">Hello World</Title>
     </>
   );
 };
