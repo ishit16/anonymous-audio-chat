@@ -1,8 +1,10 @@
 import { Form, Input, Button, Checkbox } from 'antd'
 import { useRouter } from 'next/router'
+import { getProviders, signIn, getSession, csrfToken } from "next-auth/react";
 
-const Demo = () => {
+export default function Demo({ providers }) {
   const router = useRouter()
+  console.log(providers)
 
   const onFinish = (values) => {
     console.log('Success:', values)
@@ -86,10 +88,33 @@ const Demo = () => {
               Submit
             </button>
           </Form.Item>
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            {Object.values(providers).map((provider)=>{
+              return(
+                <div key={provider.name}>
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+             onClick={() => signIn(provider.id)}>
+              Login With {provider.name}
+            </button>
+                </div>
+              );
+            })}
+          </Form.Item>
         </Form>
       </div>
     </>
   )
 }
 
-export default Demo
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      providers: await getProviders(context),
+    },
+  };
+}
