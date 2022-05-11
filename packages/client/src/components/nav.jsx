@@ -8,7 +8,7 @@ function MobileNav({open, setOpen}) {
         <div className={`absolute top-0 left-0 h-screen w-screen bg-white transform ${open ? "-translate-x-0" : "-translate-x-full"} transition-transform duration-300 ease-in-out filter drop-shadow-md `}>
             <div className="flex items-center justify-center filter drop-shadow-md bg-white h-20"> {/*logo container*/}
                 <Link href='/'>
-                <a className="text-xl font-semibold">LOGO</a>
+                <a className="text-xl font-semibold no-underline">LOGO</a>
                 </Link>
             </div>
             <div className="flex flex-col ml-4">
@@ -31,7 +31,7 @@ export default function Navbar() {
             <MobileNav open={open} setOpen={setOpen}/>
             <div className="w-3/12 flex items-center">
                 <Link href='/'>
-                <a className="text-2xl font-semibold">LOGO</a>
+                <a className="text-2xl no-underline font-semibold">LOGO</a>
                 </Link>
             </div>
             <div className="w-9/12 flex justify-end items-center">
@@ -47,22 +47,22 @@ export default function Navbar() {
 
                 <div className="hidden md:flex">
                     <Link href="/">
-                        <a className='mx-4'>
+                        <a className='font-bold text-lg mx-4 no-underline'>
                             Sign Up
                         </a>
                     </Link>
                     <Link href="/">
-                        <a className='mx-4'>
+                        <a className='mx-4 text-lg font-bold no-underline'>
                             LogIn
                         </a>
                     </Link>
                     <Link href="/">
-                        <a className='mx-4'>
+                        <a className='mx-4 text-lg font-bold no-underline'>
                             About Us
                         </a>
                     </Link>
                     <Link href="/">
-                        <a className='mx-4'>
+                        <a className='mx-4 text-lg font-bold no-underline'>
                             Contact Us
                         </a>
                     </Link>

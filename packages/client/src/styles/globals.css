@@ -3,6 +3,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-bookmark-purple {
+  --tw-bg-opacity: 1;
+  background-color: rgba(82, 103, 223, var(--tw-bg-opacity));
+}
+.relative {
+  position: relative;
+}
+.bg-bookmark-white {
+  --tw-bg-opacity: 1;
+  background-color: rgba(247, 247, 247, var(--tw-bg-opacity));
+}
+.btn {
+  @apply shadow-md py-3 px-6 rounded-md transition duration-300
+}
+.btn-purple {
+  @apply bg-bookmark-purple text-white
+}
+.btn-white {
+  @apply bg-bookmark-white text-black
+}
+
+.text-bookmark-grey {
+  --tw-text-opacity: 1;
+  color: rgba(145, 148, 162, var(--tw-text-opacity));
+}
+
 *,
 *::after,
 *::before {
@@ -41,6 +68,7 @@ background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);  /* Chrome 10-2
 background: linear-gradient(to right, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  user-select:none;
 }
 
 
